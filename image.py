@@ -1,5 +1,6 @@
 from scipy import misc
 import numpy as np
+from functools import reduce
 
 
 def read_as_1d_array(filename):
@@ -21,8 +22,10 @@ def difference(flat1, flat2):
 def similarity(flat1, flat2, threshold = 25):
     diff = difference(flat1, flat2)
     # diff_count = len(list(filter(lambda x: x >= threshold, diff)))
-    "counting diff values"
-    diff_count = sum(d >= threshold for d in diff)
+    print("counting diff values")
+    # diff_count = sum(d >= threshold for d in diff)
+    diff_count = reduce(lambda count, i: count + (i >= threshold), diff, 0)
+
     return 1.0 - (diff_count / len(diff))
 
 def similarity_f(filename1, filename2, threshold = 25):
