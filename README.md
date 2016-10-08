@@ -1,1 +1,3 @@
-any easy to forget details go here
+## Installation
+
+Run `$ install.sh` to install prerequisites using `apt-get`
