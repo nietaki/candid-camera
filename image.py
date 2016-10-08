@@ -25,7 +25,7 @@ def similarity(flat1, flat2, threshold = 25):
     print("counting diff values")
     # diff_count = sum(d >= threshold for d in diff)
     #diff_count = reduce(lambda count, i: count + (i >= threshold), diff, 0)
-    diff_count = sum(diff >= threshold)
+    diff_count = np.sum(diff >= threshold)
     print(diff_count)
     print(len(diff))
     print("returning")
