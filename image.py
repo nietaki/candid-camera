@@ -16,8 +16,16 @@ def flatten(ndarr):
     return np.reshape(ndarr, (1, -1))[0]
 
 def relative_diff(flat1, flat2, bias = 20):
+    noise = 8
+    floor = 10
     print("calculating diff")
-    return abs(flat1 - flat2) / ((flat1 + flat2 + bias) / 2)
+    diff = abs(flat1 - flat2)
+    print(diff)
+    noise_mask = (diff > noise) * 255
+    print(noise_mask)
+    no_noise_diff = np.minimum(diff, noise_mask)
+    print(no_noise_diff)
+    return no_noise_diff / np.maximum(flat1, floor)
 
 def difference(flat1, flat2, threshold = 0.2):
     diff = relative_diff(flat1, flat2)
