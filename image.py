@@ -29,7 +29,7 @@ def similarity(flat1, flat2, threshold = 25):
     print(diff_count)
     print(len(diff))
     print("returning")
-    return 1.0 - (diff_count / len(diff))
+    return 1.0 - (float(diff_count) / float(len(diff)))
 
 def similarity_f(filename1, filename2, threshold = 25):
     return similarity(read_as_1d_array(filename1), read_as_1d_array(filename2), threshold)
