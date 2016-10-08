@@ -15,12 +15,12 @@ def read_as_array(filename):
 def flatten(ndarr):
     return np.reshape(ndarr, (1, -1))[0]
 
-def difference(flat1, flat2):
+def relative_diff(flat1, flat2, bias = 20):
     print("calculating diff")
-    return abs(flat1 - flat2)
+    return abs(flat1 - flat2) / ((flat1 + flat2 + bias) / 2)
 
-def similarity(flat1, flat2, threshold = 25):
-    diff = difference(flat1, flat2)
+def difference(flat1, flat2, threshold = 0.2):
+    diff = relative_diff(flat1, flat2)
     # diff_count = len(list(filter(lambda x: x >= threshold, diff)))
     print("counting diff values")
     # diff_count = sum(d >= threshold for d in diff)
@@ -29,7 +29,7 @@ def similarity(flat1, flat2, threshold = 25):
     print(diff_count)
     print(len(diff))
     print("returning")
-    return 1.0 - (float(diff_count) / float(len(diff)))
+    return (float(diff_count) / float(len(diff)))
 
-def similarity_f(filename1, filename2, threshold = 25):
-    return similarity(read_as_1d_array(filename1), read_as_1d_array(filename2), threshold)
+def difference_f(filename1, filename2, threshold = 0.2):
+    return difference(read_as_1d_array(filename1), read_as_1d_array(filename2), threshold)
